@@ -1,8 +1,8 @@
 Group 95: Reproducibility Project Towards Single Camera Human 3D-Kinematics
  
 ## Students
-Farhad Azimzade ??????, F.Azimzade@student.tudelft.nl
-Adriaan Keurhorst, ??????, A.F.Keurhorst@student.tudelft.nl
+Farhad Azimzade ??????, F.Azimzade@student.tudelft.nl 
+Adriaan Keurhorst, ??????, A.F.Keurhorst@student.tudelft.nl 
 Floris Pauwels, 4606000, F.Pauwels@student.tudelft.nl
 
 Supervisor:
@@ -36,6 +36,7 @@ https://github.com/bittnerma/Direct3DKinematicEstimation
 
 ## Project Overview
 Topics: Biomemenic model, OpenSim, Human Pose
+
 Results to reproduce: Replace the model in the paper to generate new baselines
 
 
@@ -54,13 +55,13 @@ Results to reproduce: Replace the model in the paper to generate new baselines
 ## Conclusion
 
 ## Criteria
-Replicated: A full implementation from scratch without using any pre-existing code.
-Reproduced: Existing code was evaluated.
-Hyperparams check: Evaluating sensitivity to hyperparameters.
-New data: Evaluating different datasets to obtain similar results.
-New algorithm variant: Evaluating a slightly different variant.
-New code variant: Rewrote or ported existing code to be more efficient/readable.
-Ablation study: Additional ablation studies.
+Replicated: A full implementation from scratch without using any pre-existing code. 
+Reproduced: Existing code was evaluated. 
+Hyperparams check: Evaluating sensitivity to hyperparameters. 
+New data: Evaluating different datasets to obtain similar results. 
+New algorithm variant: Evaluating a slightly different variant. 
+New code variant: Rewrote or ported existing code to be more efficient/readable. 
+Ablation study: Additional ablation studies. 
 
 ### Individual Contribution
 
