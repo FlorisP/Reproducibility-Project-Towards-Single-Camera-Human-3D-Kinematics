@@ -1,12 +1,17 @@
-Group 95: Reproducibility Project Towards Single Camera Human 3D-Kinematics
- 
-## Students
+# Group 95: Reproducibility Project Towards Single Camera Human 3D-Kinematics (WORK-IN-PROGRESS)
+
+## Course Info
+
+CS4240 Deep Learning (2022/2023 Q3) TU Delft
+
+Supervisor:  
+Xucong Zhang, xucong.zhang@tudelft.nl 
+
+Students:  
 Farhad Azimzade ??????, F.Azimzade@student.tudelft.nl  
 Adriaan Keurhorst, ??????, A.F.Keurhorst@student.tudelft.nl  
 Floris Pauwels, 4606000, F.Pauwels@student.tudelft.nl
 
-Supervisor:
-Xucong Zhang, xucong.zhang@tudelft.nl 
 
 ## Table of Contents
 
