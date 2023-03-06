@@ -2,7 +2,8 @@
 
 ## Course Info
 
-CS4240 Deep Learning (2022/2023 Q3) TU Delft
+CS4240 Deep Learning (2022/2023 Q3)  
+TU Delft
 
 Supervisor:  
 Xucong Zhang, xucong.zhang@tudelft.nl 
