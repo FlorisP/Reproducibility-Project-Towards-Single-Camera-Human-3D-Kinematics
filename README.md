@@ -10,7 +10,7 @@ Xucong Zhang, xucong.zhang@tudelft.nl
 
 Students:  
 Farhad Azimzade ??????, F.Azimzade@student.tudelft.nl  
-Adriaan Keurhorst, ??????, A.F.Keurhorst@student.tudelft.nl  
+Adriaan Keurhorst, 4550994, A.F.Keurhorst@student.tudelft.nl  
 Floris Pauwels, 4606000, F.Pauwels@student.tudelft.nl
 
 
