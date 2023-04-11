@@ -46,6 +46,11 @@ Topics: Biomemenic model, OpenSim, Human Pose
 
 Results to reproduce: Replace the model in the paper to generate new baselines
 
+This blog aims to reproduce the deep learning research by Bittner, M., et al. (2023) about markerless estimation of 3D Kinematics. 3D human kinematics relates to measuring joint angles between different parts of the body. These joint angles are vital for professional physicians to give precise advice to, for example, athletes to perform better in their respective field. To accurately see these joint angles as a human, you need to be well trained to notice small offsets in joint angles between body segments. A multi-step approach, in combination with videos of patients, has already been shown to be very useful in the estimation of human kinematics, but still contain consistent sources of errors. The multi-step approach for human kinematics is challenged in this paper, which suggests that using Deep Learning to estimate human kinematics is a more sensible way to go forward.
+The algorithm presented in this paper uses deep learning algorithm which directly learns from a video to joint angles, and scales using deep neural networks. 
+
+
+
 
 ## Installation
 ### Requirements
