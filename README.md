@@ -20,6 +20,7 @@ Floris Pauwels, 4606000, F.Pauwels@student.tudelft.nl
 - [Project Overview](#project-overview)
 - [Installation](#installation)
   * [Requirements](#requirements)
+- [Problems Encountered](#problems-encountered)
 - [Dataset](#dataset)
 - [Method](#method)
   * [Models/architecture](#models-architecture)
@@ -48,6 +49,12 @@ Results to reproduce: Replace the model in the paper to generate new baselines
 
 ## Installation
 ### Requirements
+
+## Problems Encountered
+
+Problems in the cloud:
+
+Problems during data preparation
 
 ## Dataset
 
