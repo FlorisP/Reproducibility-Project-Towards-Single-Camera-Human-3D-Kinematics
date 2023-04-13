@@ -77,15 +77,15 @@ The sequential and convolutional networks have lambda values of:
  - λ3 = 0.1
  - λ4 = 0.06
 
-These values were determined experimentally.
+These values were determined experimentally by the authors of the paper.
 
 ## Installation
 ### Requirements
 Installation requirements to run the algorithm presented by the paper are the following:
- Python 3.8.0 
- PyTorch 1.11.0
- OpenSim 4.3+        
 
+ - Python 3.8.0 
+ - PyTorch 1.11.0
+ - OpenSim 4.3+        
 
 ## Problems Encountered
 
