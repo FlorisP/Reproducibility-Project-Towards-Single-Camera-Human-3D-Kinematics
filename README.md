@@ -46,7 +46,7 @@ Topics: Biomemenic model, OpenSim, Human Pose
 
 Results to reproduce: Replace the model in the paper to generate new baselines
 
-This blog aims to reproduce the deep learning research by Bittner, M., et al. (2023) about markerless estimation of 3D Kinematics. 3D human kinematics relates to measuring joint angles between different parts of the body. These joint angles are vital for professional physicians to give precise advice to, for example, athletes to perform better in their respective field. To accurately see these joint angles as a human, you need to be well trained to notice small offsets in joint angles between body segments. A multi-step approach, in combination with videos of patients, has already been shown to be very useful in the estimation of human kinematics, but still contain consistent sources of errors. The multi-step approach for human kinematics is challenged in this paper, which suggests that using Deep Learning to estimate human kinematics is a more sensible way to go forward.
+This blog aims to reproduce the deep learning research by Bittner, M., et al. (2023) about markerless estimation of 3D Kinematics (3DKE). 3D human kinematics relates to measuring joint angles between different parts of the body. These joint angles are vital for professional physicians to give precise advice to, for example, athletes to perform better in their respective field. To accurately see these joint angles as a human, you need to be well trained to notice small offsets in joint angles between body segments. A multi-step approach, in combination with videos of patients, has already been shown to be very useful in the estimation of human kinematics, but still contain consistent sources of errors. The multi-step approach for human kinematics is challenged in this paper, which suggests that using Deep Learning to estimate human kinematics is a more sensible way to go forward.
 
 The algorithm presented in this paper uses deep learning algorithm which directly learns from a video to joint angles, and scales using deep neural networks. 
 
@@ -96,6 +96,13 @@ Problems during data preparation
 ## Dataset
 
 ## Method
+The reproduction project was aimed to explore how the 3DKE algorithm would cope when it is presented with 'new' testing data. This testing data would be made by our group, by performing data augmentation on the testing set. 
+
+Data augmentation is the flipping, resizing, cropping, altering the brightness, changing the contrast of the dataset. It is usually applied to the training set, as it has been shown to improve testing performance. This is due to the fact that data augmentation allows the training dataset to increase in size. 
+
+When applied to images, a mirrored image of a cat is still a cat. Applying mirroring to videos, however, changes things. A mirrored video of someone moving their left arm will show someone moving their right arm. 
+
+
 ### Models/architecture
 ### Preprocessing
 ### Training
