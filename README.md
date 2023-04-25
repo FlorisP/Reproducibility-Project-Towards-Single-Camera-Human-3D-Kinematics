@@ -98,9 +98,11 @@ The reproduction project was aimed to explore how the 3DKE algorithm would cope 
 
 Data augmentation is the flipping, resizing, cropping, altering the brightness, changing the contrast of the dataset. It is usually applied to the training set, as it has been shown to improve testing performance. This is due to the fact that data augmentation allows the training dataset to increase in size. 
 
-When applied to images, a mirrored image of a cat is still a cat. Applying mirroring to videos, however, changes things. A mirrored video of someone moving their left arm will show someone moving their right arm. 
+When applied to images, a mirrored image of a cat is still a cat. Applying mirroring to videos, however, changes things. A mirrored video of someone moving their left arm will show someone moving their right arm. Augmenting the test set and thereby creating 'new' testing data will exploit several aspects of the algorithm.
 
-unfinished
+Testing the algorithm will give insights in its generalisability. A previous study, by Recht B. et al. has shown that presenting different ImageNet classifiers with new but comparable testing data, decreases the accuracy, indicating that the test set has been used too much to develop the algorithm. 
+
+This study will aim to do something similar, but with videos. By presenting augmented versions of the original test set, the algorithm's generalisability will be explored. 
 
 ## Problems Encountered
 
