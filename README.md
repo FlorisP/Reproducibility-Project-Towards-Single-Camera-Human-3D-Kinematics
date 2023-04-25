@@ -9,7 +9,7 @@ Supervisor:
 Xucong Zhang, xucong.zhang@tudelft.nl 
 
 Students:  
-Farhad Azimzade ??????, F.Azimzade@student.tudelft.nl  
+Farhad Azimzade 4788206, F.Azimzade@student.tudelft.nl  
 Adriaan Keurhorst, 4550994, A.F.Keurhorst@student.tudelft.nl  
 Floris Pauwels, 4606000, F.Pauwels@student.tudelft.nl
 
@@ -44,9 +44,13 @@ https://github.com/bittnerma/Direct3DKinematicEstimation
 ## Project Overview
 Topics: Biomemenic model, OpenSim, Human Pose
 
-Results to reproduce: Replace the model in the paper to generate new baselines
+Results to reproduce: Augment the testing data to check for robustness of the model
 
-This blog aims to reproduce the deep learning research by Bittner, M., et al. (2023) about markerless estimation of 3D Kinematics (3DKE). 3D human kinematics relates to measuring joint angles between different parts of the body. These joint angles are vital for professional physicians to give precise advice to, for example, athletes to perform better in their respective field. To accurately see these joint angles as a human, you need to be well trained to notice small offsets in joint angles between body segments. A multi-step approach, in combination with videos of patients, has already been shown to be very useful in the estimation of human kinematics, but still contain consistent sources of errors. The multi-step approach for human kinematics is challenged in this paper, which suggests that using Deep Learning to estimate human kinematics is a more sensible way to go forward. The algorithm presented by this paper shows great potential for usage in combination with mobile phones, and has been shown to be an improved approach compared to the multi-step approach. 
+This blog aims to reproduce the deep learning research by Bittner, M., et al. (2023) on markerless estimation of 3D Kinematics (3DKE). 3D human kinematics relates to measuring joint angles between different parts of the human body. These joint angles are vital for professional physicians to give precise advice to, for example, athletes to perform better in their respective sport. This information can also aid in diagnosing neurodegenerative diseases more efficiently. Accurately analysing joint angles of a subject requires extensive training of the human evaluator, as it involves fine distinctions in the visual erception of the subject, as well as some expert knowledge. As such, efforts have been made in automating the process of such kinematics analysis.
+
+One such approach is the multi-step 3D kinematics, whereby [add short description of the method]. Applied to a dataset of videos of various human subjects, the multi-step approach has already been shown to be highly performant in the estimation of human kinematics.
+
+In the paper by Bittner et al., an alternative to the multi-step approach for human kinematics is presented, which involves direct application of Deep Learning in an end-to-end fashion on the video dataset to estimate human kinematics. The algorithm presented in this paper shows great potential for usage in combination with mobile phones, and has been shown to be an improved approach compared to the multi-step approach. 
 
 The algorithm presented in this paper uses deep learning algorithm which directly learns from a video to joint angles and scales using deep neural networks. 
 
@@ -60,9 +64,11 @@ A standard pre-trained ResNeXt-50 is used as the convolutional backbone, with th
 
 The overall objective function is 
 
-L = λ1Ljoint + λ2Lmarker + λ3Lbody + λ4Langle,
+$$
+L = \lambda_1L_{joint} + \lambda_2L_{marker} + \lambda_3L_{body} + \lambda_4L_{angle}
+$$,
 
-with λ1, λ2, λ3, λ4 as weights of the losses. 
+with $\lambda_1$, $\lambda_2$, $\lambda_3$, $\lambda_4$ as weights of the losses. 
 
 The training requirements are the joint angle and the scales of individual bones, a rotation matrix of the pelvis to the ground as well as the marker positions corresponding to them. Joint angles are generated using the OpenSim software. The resulting ground truth values are the calculated joint angles, the scaling factors and the virtual marker positions.
 
@@ -72,10 +78,10 @@ The ResNetXt algorithm used has the following hyperparameters:
  - Learning rate = exponentially decays in two steps from 5 × 10−4 to 3.33 × 10−5 over 28 epochs and from 3.33 × 10−6 to 10−6 over 2 epochs
 
 The sequential and convolutional networks have lambda values of:
- - λ1 = 1.0
- - λ2 = 2.0
- - λ3 = 0.1
- - λ4 = 0.06
+ - $\lambda_1$ = 1.0
+ - $\lambda_2$ = 2.0
+ - $\lambda_3$ = 0.1
+ - $\lambda_4$ = 0.06
 
 These values were determined experimentally by the authors of the paper.
 
@@ -106,9 +112,14 @@ This study will aim to do something similar, but with videos. By presenting augm
 
 ## Problems Encountered
 
-Problems in the cloud:
+### Issues with Cloud Computing:
 
-Problems during data preparation
+Given that the original research project made extensive use of GPUs for developing the model, deploying GPUs for the reproduction appeared to be a reasonable step. In order to achieve this, a popular cloud computing platform, Google Cloud, was decided upon. The general plan involved running a virtual machine with access to GPUs on the cloud to augment the data and re-test the model on the augmented data. However, there have certain roadblocks we have run into with respect to this approach.
+
+- physical resource allocation (on the regional servers)
+- installing the necessary software (conda env, opensim, etc.)
+
+### Issues with Data Preparation:
 
 ### Models/architecture
 
