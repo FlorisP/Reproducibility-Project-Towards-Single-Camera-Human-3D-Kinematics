@@ -100,13 +100,13 @@ The 3DKE algorithm was trained and tested on the BML-MoVi Database (https://www.
 
 
 ## Method
-The reproduction project was aimed to explore how the 3DKE algorithm would cope when it is presented with 'new' testing data. This testing data would be made by our group, by performing data augmentation on the testing set. 
+The reproduction project was aimed at exploring the robustness of the D3KE method to input data augmentation. In particular, we would like to evaluate the performance of the D3KE algorithm on an augmented testing data set.
 
-Data augmentation is the flipping, resizing, cropping, altering the brightness, changing the contrast of the dataset. It is usually applied to the training set, as it has been shown to improve testing performance. This is due to the fact that data augmentation allows the training dataset to increase in size. 
+Data augmentation we considered were flipping, resizing, cropping, altering the brightness, changing the contrast of the frames in the input videos. Such augmentation is usually applied to the training set, as part of inducing robustness toward certain changes of the input. In fact, augmentation of the training data was performed in the training of the original D3KE model, as is stated in the paper.
 
-When applied to images, a mirrored image of a cat is still a cat. Applying mirroring to videos, however, changes things. A mirrored video of someone moving their left arm will show someone moving their right arm. Augmenting the test set and thereby creating 'new' testing data will exploit several aspects of the algorithm.
+Data augmentation can also allow the training dataset to effectively increase in size. When applied to images, a mirrored image of a cat is still a cat. Applying mirroring to videos of people, however, changes things when the model is created of the person in the video. A mirrored video of someone moving their left arm will show someone moving their right arm. Augmenting the test set and thereby creating 'new' testing data will exploit several aspects of the algorithm.
 
-Testing the algorithm will give insights in its generalisability. A previous study, by Recht B. et al. has shown that presenting different ImageNet classifiers with new but comparable testing data, decreases the accuracy, indicating that the test set has been used too much to develop the algorithm. 
+Testing the algorithm will give insights into its generalisability. A previous study, by Recht B. et al. has shown that presenting different ImageNet classifiers with new but comparable testing data, decreases the accuracy, indicating that the test set has been used too much to develop the algorithm. 
 
 This study will aim to do something similar, but with videos. By presenting augmented versions of the original test set, the algorithm's generalisability will be explored. 
 
@@ -116,7 +116,9 @@ This study will aim to do something similar, but with videos. By presenting augm
 
 Given that the original research project made extensive use of GPUs for developing the model, deploying GPUs for the reproduction appeared to be a reasonable step. In order to achieve this, a popular cloud computing platform, Google Cloud, was decided upon. The general plan involved running a virtual machine with access to GPUs on the cloud to augment the data and re-test the model on the augmented data. However, there have certain roadblocks we have run into with respect to this approach.
 
-- physical resource allocation (on the regional servers)
+Firstly, the allocation of physical resources on Google Cloud turned out to be more challenging than expected. It has taken a while to arrive at a server that met the needs, despite our requirements being relatively limited.
+
+Secondly, there have been issues when attempting to build the project on the cloud virtual machien instance. In particular, certain packages prescribed in the conda environment file could not be installed by conda.
 - installing the necessary software (conda env, opensim, etc.)
 
 ### Issues with Data Preparation:
