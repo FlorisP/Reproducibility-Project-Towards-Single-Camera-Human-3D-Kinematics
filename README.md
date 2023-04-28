@@ -30,11 +30,10 @@ https://github.com/bittnerma/Direct3DKinematicEstimation
 - [Method](#method)
 - [Installation Requirements](#installation-requirements)
 - [Problems Encountered](#problems-encountered)
-  * [Errors from Running the Original Code](#errors)
-  * [Issues with Efficiency](#efficiency)
-  * [Cloud Computing Issues](#cloud-computing)
+  * [Errors from Running the Original Code](#errors-from-running-the-original-code)
+  * [Issues with Efficiency](#issues-with-efficiency)
+  * [Cloud Computing Issues](#cloud-computing-issues)
 - [Results](#results)
-- [Conclusion](#conclusion)
 - [Individual Contribution](#individual-contribution)
 
 
@@ -127,7 +126,7 @@ The *generate_opensim_gt.py* and the *prepare_dataset.py* had to be changed to b
 
 The first error we got from running *generate_opensim_gt.py* was:  
 [warning] Couldn't find file 'videoMuscle_sacrum.obj'
-This warning can be solver with:
+This warning can be solved with:
 ```python
 npzPathList=gtGenerator.traverse_npz_files("")
 ```
@@ -192,14 +191,12 @@ Secondly, there have been issues when attempting to build the project on the clo
 
 We encountered several errors during the process of reproducing the original results. These errors originated from incompatible code and insufficient hardware. This is why we were unable to reproduce the original results, and abandoned our original plan to test the generalizability of the model by data augmentation.  
 
-Due to the issues we decided to create a hashing system that:  
+Due to the issues we faced, we decided to create a hashing checksum system that:  
 1. Creates hashes of the files in specified folders,
 2. Uses these hashes to check if all files are stored in the correct location,
 3. Check if a file is already processed or generated, and skips these files from being unnecessarily recreated.
 
 These systems make it easier to find which files are missing, and removes the issue of reprocessing files that are already processed. This can greatly improve the efficiency of the code if some files have to be reprocessed, for example when the PC is out of storage.
-
-## Conclusion
 
 
 ## Individual Contribution
