@@ -176,6 +176,14 @@ As said before, the *prepare_dataset.py* creates an additional total file size o
 This created an issue for us, as we were out of storage multiple times, as there was no mention nor indication how big the eventual dataset would be.  
 An additional problem was that the code does not check if the files are already correctly processed, but reprocesses all files again when the code is re-run. This took a lot of time and computing, as each re-run took a couple days. 
 
+An easy way to skip files that are already processed in the *generate_opensim_gt.py* script is done with the following code:  
+```python
+for path in npzPathList:
+    if os.path.exists(path):
+        continue
+    gtGenerator.generate(path)
+```
+A similar solution can be used to skip files from reprocessing in the *prepare_dataset.py* script. A more robuust method that also checks the integrity of the files is to use a checksum system and check if the hashes correspond. This system is added to the GitHub files as the *hash_check.py* and *hash_create.py* files.
 
 ### Cloud Computing Issues
 
@@ -192,9 +200,9 @@ As a result of the afore-mentioned issues, cloud computing was not utilised for 
 We encountered several errors during the process of reproducing the original results. These errors originated from incompatible code and insufficient hardware. This is why we were unable to reproduce the original results, and abandoned our original plan to test the generalizability and robustness of the model by data augmentation.  
 
 Due to the issues we faced, we decided to create a hashing checksum system that:  
-1. Creates hashes of the files in specified folders,
-2. Uses these hashes to check if all files are stored in the correct location,
-3. Check if a file is already processed or generated, and skips these files from being unnecessarily recreated.
+1. Creates hashes of the files in specified folders (*hash_check.py*)
+2. Uses these hashes to check if all files are stored in the correct location (*hash_create.py*)
+3. Check if a file is already processed or generated, and skips these files from being unnecessarily recreated (Rewrite *generate_opensim_gt.py* and *prepare_dataset.py* as described above)
 
 These systems make it easier to find which files are missing, and removes the issue of reprocessing files that are already processed. This can greatly improve the efficiency of the code if some files have to be reprocessed, for example when the PC is out of storage.
 
