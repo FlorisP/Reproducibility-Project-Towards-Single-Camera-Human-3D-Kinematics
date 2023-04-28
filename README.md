@@ -14,7 +14,8 @@ Farhad Azimzade 4788206, F.Azimzade@student.tudelft.nl
 Adriaan Keurhorst, 4550994, A.F.Keurhorst@student.tudelft.nl  
 Floris Pauwels, 4606000, F.Pauwels@student.tudelft.nl
 
-In this project we try to reproduce results from the paper *Towards single camera human 3D-kinematics Sources*:   
+In this project we try to reproduce results from the paper  
+*Towards single camera human 3D-kinematics Sources*:   
 https://www.mdpi.com/1424-8220/23/1/341
 
 We use the provided code the authors shared on GitHub:  
@@ -27,7 +28,7 @@ https://github.com/bittnerma/Direct3DKinematicEstimation
 - [Theory](#theory)
 - [Dataset](#dataset)
 - [Method](#method)
-- [Installation Requirements](#installation-(#requirements)
+- [Installation Requirements](#installation-requirements)
 - [Problems Encountered](#problems-encountered)
   * [Errors from Running the Original Code](#errors)
   * [Issues with Efficiency](#efficiency)
@@ -62,9 +63,7 @@ A standard pre-trained ResNeXt-50 is used as the convolutional backbone, with th
 
 The overall objective function is 
 
-$
-L = \lambda_1L_{joint} + \lambda_2L_{marker} + \lambda_3L_{body} + \lambda_4L_{angle}
-$,
+$$L = \lambda_1L_{joint} + \lambda_2L_{marker} + \lambda_3L_{body} + \lambda_4L_{angle}$$
 
 with $\lambda_1$, $\lambda_2$, $\lambda_3$, $\lambda_4$ as weights of the losses. 
 
@@ -109,7 +108,13 @@ Installation requirements to run the algorithm presented by the paper are the fo
  - PyTorch 1.11.0
  - OpenSim 4.3+        
 
-The authors of the paper created an environment file with the necessary libraries to install. 
+The authors of the paper created an environment file with the necessary libraries to install.   
+In addition, they provided an installation guide-line to:
+1. Install and activate the correct conda environment
+2. Download the source datasets from the provided links
+3. How to unpack the resources
+4. How to generate and prepare the dataset
+5. How to download, run, evaluate, and train the models
 
 
 ## Problems Encountered
@@ -118,47 +123,60 @@ The authors of the paper created an environment file with the necessary librarie
 
 It was difficult to get the correct datasets in the correct folders, as there were many files from multiple sources to download and put into the correct folders in the project. There was no system like a *checksum system* that checks whether all files are complete and correctly stored. With a bit of trial-and-error we got this working.
 
-The *generate_opensim_gt.py* and the *prepare_dataset.py* ...
+The *generate_opensim_gt.py* and the *prepare_dataset.py* had to be changed to be able to run them. 
 
 The first error we got from running *generate_opensim_gt.py* was:  
-```
 [warning] Couldn't find file 'videoMuscle_sacrum.obj'
-```
 This warning can be solver with:
 ```python
 npzPathList=gtGenerator.traverse_npz_files("")
 ```
 This solution was found by a fellow student on *Mattermost* after we inquired about the issue.
 
-
-
-
+A second error in this script can be suppressed by adding:
 ```python
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 ```
+See https://stackoverflow.com/questions/74217717/what-does-os-environkmp-duplicate-lib-ok-actually-do for more info on the issue.
 
-Paths needed to be changed to make the code use the correct files, such as adding the following line to the *prepare_dataset.py* file:
-
+The next error was "RuntimeError: std:: exception in 'bool OpenSim::ScaleTool::run() const'" in *prepare_dataset.py*. 
+A solution was once again found on Mattermost, where the paths need to be set as absolute, e.g.:
 ```python
 sys.path.append(str(Path(__file__).absolute().parent / "ms_model_estimation"))
+parent_dir = Path(__file__).absolute().parent
 ```
+See https://github.com/opensim-org/opensim-gui/issues/448 for more info on this issue.
 
+In addition to changing the scripts to remove errors, some paths needed to be changed to make the code use the correct files, such as adding the following line to the *prepare_dataset.py* file:
+```python
+outputFolder = "D:/_dataset"
+```
+This code depends on where you want the dataset stored. Beware that the processed dataset contains ~550GB of data. We needed to reprocess all files multiple times as we were often short of data. More on that in the next section. 
 
+We also once had an unknown error that we fixed by creating a new environment and retracing all steps. This may work for some errors.
+
+With the *run_inference.py* and *run_training.py* files, we had the following error:  
+DLL load failed while importing _multiarray_umath: The specified module could not be found.  
+We might have been able to fix this error in time, but time was getting short, and we knew the original plan was out of reach with the constant accumulation of unforseen issues with running the code. We instead chose to create code that makes the data more manageable.
 
 
 ### Issues with Efficiency
 
-
+A GPU can increase processing speed by more than 10x. The code does not automatically use the GPU, so in each file that we ran we needed to include the following code:  
 ```python
 import torch
 COMP_DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 ```
+Now the code automatically uses the GPU if there is one installed for GPU specific tasks.
+  
+Still, the processing speed was slower than expected, even with the GPU enabled. On the original GitHub, it is stated that the processes of the *generate_opensim_gt.py* and *prepare_dataset.py* code "might take several hours!".  
+Our experience was on a high-end PC with a *AMD Ryzen 9 5950X* processor and a *Nvidia GTX 1070*, and it took **several days** for these processes to finish with GPU enabled. We assume the original authors processed the data on a powerful server, instead of a high-end PC. This was not mentioned in the README.
 
+As said before, the *prepare_dataset.py* creates an additional total file size of over 500 GB of storage.    
+This created an issue for us, as we were out of storage multiple times, as there was no mention nor indication how big the eventual dataset would be.  
+An additional problem was that the code does not check if the files are already correctly processed, but reprocesses all files again when the code is re-run. This took a lot of time and computing, as each re-run took a couple days. 
 
-Generated total file size of over 500 GB. 
-The code does not check if a file has already been correctly processed. 
-On a high-end PC with a *AMD Ryzen 9 5950X* processor and a *Nvidia GTX 1070* 
 
 ### Cloud Computing Issues
 
@@ -179,13 +197,14 @@ Due to the issues we decided to create a hashing system that:
 2. Uses these hashes to check if all files are stored in the correct location,
 3. Check if a file is already processed or generated, and skips these files from being unnecessarily recreated.
 
+These systems make it easier to find which files are missing, and removes the issue of reprocessing files that are already processed. This can greatly improve the efficiency of the code if some files have to be reprocessed, for example when the PC is out of storage.
 
 ## Conclusion
 
 
 ## Individual Contribution
 
-Farhad Azimzade: Cloud computing / Report
-Adriaan Keurhorst: Research / Report
+Farhad Azimzade: Cloud computing / Report  
+Adriaan Keurhorst: Research / Report  
 Floris Pauwels: Reproducing / Hashing
 
