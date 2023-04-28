@@ -95,7 +95,7 @@ The data augmentation we considered were flipping, resizing, cropping, altering 
 
 Data augmentation can also allow the training dataset to effectively increase in size. When applied to images, a mirrored image of a cat is still a cat. Applying mirroring to videos of people, however, changes things when the model is created of the person in the video. A mirrored video of someone moving their left arm will show someone moving their right arm. Augmenting the test set and thereby creating 'new' testing data will exploit several aspects of the algorithm.
 
-Testing the algorithm will give insights into its generalisability. The study *Do ImageNet Classifiers Generalize to ImageNet?* by Recht B. et al. has shown that presenting different ImageNet classifiers with new but comparable testing data, decreases the accuracy, indicating that the test set has been used too much to develop the algorithm. 
+Testing the algorithm will give insights into its generalisability. The study *Do ImageNet Classifiers Generalize to ImageNet?* by Recht B. et al. has shown that presenting different ImageNet classifiers with new but comparable testing data, decreases the accuracy, indicating that the test set has been relied upon too much in the training of the algorithm. 
 
 This study will aim to do something similar, but with videos. By presenting augmented versions of the original test set, the algorithm's generalisability will be explored. 
 
@@ -181,11 +181,11 @@ An additional problem was that the code does not check if the files are already 
 
 Given that the original research project made extensive use of GPUs for developing the model, deploying GPUs for the reproduction appeared to be a reasonable step. In order to achieve this, a popular cloud computing platform, Google Cloud, was decided upon. The general plan involved running a virtual machine with access to GPUs on the cloud to augment the data and re-test the model on the augmented data. However, there have certain roadblocks we have run into with respect to this approach.
 
-Firstly, the allocation of physical resources on Google Cloud turned out to be more challenging than expected. It has taken a while to arrive at a server that met the needs, despite our requirements being relatively limited.
+Firstly, the allocation of physical resources on Google Cloud turned out to be more challenging than expected. It has taken a while to arrive at a server that met the needs, despite our requirements being relatively limited. This has taken a while to resolve, as the allocation has to be manually performed on individual regional servers.
 
-Secondly, there have been issues when attempting to build the project on the cloud virtual machien instance. In particular, certain packages prescribed in the conda environment file could not be installed by conda.
-- installing the necessary software (conda env, opensim, etc.)
+Secondly, there have been issues when attempting to build the project on the cloud virtual machine instance. In particular, certain packages prescribed in the conda environment file could not be installed by conda. These conda environment packages appeared to halt the creation of the environment. After numerous attempts, this issue has not been resolved.
 
+As a result of the afore-mentioned issues, cloud computing was not utilised for the project due to time efficiency considerations. Instead, the work on the data generation for the model was performed locally.
 
 ## Results
 
